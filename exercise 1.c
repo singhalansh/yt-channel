@@ -1,5 +1,5 @@
 /* 
 You have to print multiplication table of a number 
 given by the user with help of all the loops 
-and a recursive
+and a recursive functions
 */
