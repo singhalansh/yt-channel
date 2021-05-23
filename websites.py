@@ -12,4 +12,11 @@ if __name__ == '__main__':
         webbrowser.open("www.instagram.com")
     elif "facebook" in query:
         webbrowser.open("www.facebook.com")
-    
+        elif "google" in query:
+        webbrowser.open("www.google.com")
+    elif "stackoverflow" in query:
+        webbrowser.open("www.stackoverflow.com")
+    elif "github" in query:
+        webbrowser.open("www.github.com")
+    elif "microsoft" in query:
+        webbrowser.open("www.microsoft.com")
