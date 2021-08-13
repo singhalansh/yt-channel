@@ -121,10 +121,10 @@ if __name__ == '__main__':
 
         webbrowser.open(f"https://www.google.com/search?q={search}&oq={search}&aqs=chrome.0.69i59j0i22i30l9.3639j0j15&sourceid=chrome&ie=UTF-8")
 
-    elif "open code" == query or "vs code" in query:
-        path = "path of app"
-	path = path.replace("\","/")
-	webbrowser.open(path)
+  #  elif "open code" == query or "vs code" in query:
+   #     path = "path of app"
+	#path = path.replace("\","/")
+	#webbrowser.open(path)
     else:
         string = query.split()
         search = ""
