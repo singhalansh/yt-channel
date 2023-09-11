@@ -10,21 +10,28 @@ time = int(datetime.datetime.now().hour)
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 
-engine.setProperty('voice', voices[2].id)
+engine.setProperty('voice', voices[0].id)
 
 
 def listen():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source, duration=2)  # Adjust for ambient noise
+        r.energy_threshold = 2000 # Adjust the energy threshold   
         print("listening....")
-        r.pause_threshold = 2
         audio = r.listen(source)
-        try:
-            print("recognising....")
-            query = r.recognize_google(audio, language="en-in")
-        except:
-            print("voice not recognised ...... please try again!")
-        return query
+        
+        r.pause_threshold = 2
+    try:
+        print("recognising....")
+        query = r.recognize_google(audio, language="en-in")
+        print(query)
+    except:
+        print(e)
+        query = ""
+        print("voice not recognised ...... please try again!")
+
+    return str(query)
 
 
 def say(str):
@@ -45,8 +52,8 @@ if __name__ == '__main__':
     wishme()
     say("I am JARVIS made by mr. Ansh Singhal how may I help you?")
 
-    query = listen().lower()
-    print(query)
+    query = str(listen()).lower()
+    # print(query)
     if "open youtube" == query:
         webbrowser.open("www.youtube.com")
     elif "flipkart" in query:
@@ -67,12 +74,12 @@ if __name__ == '__main__':
         try:
             number = "+91"
             say("enter the number I have to send message")
-            number += listen()
+            number += str(listen())
             say("okay, now what should I send?")
             msg = listen()
             minute = int(datetime.datetime.now().strftime("%M"))+2
 
-            pywhatkit.sendwhatmsg(number, msg, time, minute, 10)
+            pywhatkit.sendwhatmsg(number, msg, time, minute, 10) # type: ignore
         except Exception as e:
             print(e)
             say("I can't send that")
@@ -87,7 +94,7 @@ if __name__ == '__main__':
         content = listen()
         say("please enter reciever's email in terminal")
         reciever = input()
-        pywhatkit.send_mail(sender, password, sub, content, reciever)
+        pywhatkit.send_mail(sender, password, str(sub), str(content), reciever) #type: ignore
     elif "wikipedia" in query:
         query = query.replace("on wikipedia","")
         query = query.replace("wikipedia","")
@@ -121,8 +128,8 @@ if __name__ == '__main__':
 
         webbrowser.open(f"https://www.google.com/search?q={search}&oq={search}&aqs=chrome.0.69i59j0i22i30l9.3639j0j15&sourceid=chrome&ie=UTF-8")
 
-  #  elif "open code" == query or "vs code" in query:
-   #     path = "path of app"
+    #  elif "open code" == query or "vs code" in query:
+    #     path = "path of app"
 	#path = path.replace("\","/")
 	#webbrowser.open(path)
     else:
